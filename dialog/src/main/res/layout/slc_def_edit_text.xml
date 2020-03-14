@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp">
+
+    <View
+        android:id="@+id/scrollIndicatorUp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="top"
+        android:background="?attr/colorControlHighlight"
+        android:visibility="gone" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:id="@+id/ll_message_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:id="@+id/textSpacerNoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/abc_dialog_padding_top_material"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@android:id/message"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+            <Space
+                android:id="@+id/textSpacerNoButtons"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/abc_dialog_padding_top_material"
+                android:visibility="gone" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/scrollIndicatorDown"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="?attr/colorControlHighlight"
+        android:visibility="gone" />
+
+</FrameLayout>

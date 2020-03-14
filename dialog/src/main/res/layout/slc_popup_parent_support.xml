@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/popup_content_support"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
