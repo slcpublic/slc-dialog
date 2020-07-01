@@ -331,8 +331,8 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         private final int mTheme;
         private int mAnimRes;
         private boolean mHideable = true;
-        private int compulsoryBottomSheet = BottomSheetBehavior.STATE_DRAGGING;
 
+        private int mCompulsoryBottomSheet = BottomSheetBehavior.STATE_DRAGGING;
         public Builder(@NonNull Context context) {
             this(context, SlcBottomSheetAlertDialog.resolveDialogTheme(context, 0));
         }
@@ -347,8 +347,8 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
             return this.P.mContext;
         }
 
-        public Builder setCompulsoryBottomSheet(int compulsoryBottomSheet) {
-            this.compulsoryBottomSheet = compulsoryBottomSheet;
+        public Builder setCompulsoryBottomSheet(int mCompulsoryBottomSheet) {
+            this.mCompulsoryBottomSheet = mCompulsoryBottomSheet;
             return this;
         }
 
@@ -610,6 +610,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
 
         public SlcBottomSheetAlertDialog create() {
             SlcBottomSheetAlertDialog dialog = new SlcBottomSheetAlertDialog(this.P.mContext, this.mTheme);
+            dialog.setCompulsoryBottomSheet(mCompulsoryBottomSheet);
             dialog.setHideable(mHideable);
             dialog.setAnimRes(mAnimRes);
             this.P.apply(dialog.mAlert);

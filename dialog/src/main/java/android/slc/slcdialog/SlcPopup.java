@@ -47,7 +47,6 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.SlcBottomSheetAlertDialog;
 
 import java.lang.ref.WeakReference;
