@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.SlcBottomSheetAlertDialog;
 
 import java.lang.ref.WeakReference;
@@ -26,8 +25,7 @@ public class SlcBottomDialogFragment extends AppCompatDialogFragment implements 
     private SlcBottomSheetAlertDialog.Builder mBuilder;
     private FragmentManager fragmentManager;
     private String mKey;
-    private boolean isPositiveClickIsAutoDismiss = true;
-    private int compulsoryBottomSheet = BottomSheetBehavior.STATE_DRAGGING;
+    private boolean isPositiveClickIsAutoDismiss=true;
     private DialogInterface.OnDismissListener onDismissListener;
     private DialogInterface.OnCancelListener onCancelListener;
     private SparseArray<DialogInterface.OnClickListener> onClickListenerSparseArray;
@@ -49,14 +47,13 @@ public class SlcBottomDialogFragment extends AppCompatDialogFragment implements 
                                                                     DialogInterface.OnDismissListener onDismissListener,
                                                                     DialogInterface.OnCancelListener onCancelListener,
                                                                     SparseArray<DialogInterface.OnClickListener> onClickListenerSparseArray,
-                                                                    boolean cancelable, int compulsoryBottomSheet, String key, boolean isPositiveClickIsAutoDismiss) {
+                                                                    boolean cancelable, String key, boolean isPositiveClickIsAutoDismiss) {
         SlcBottomDialogFragment slcDialogFragment = new SlcBottomDialogFragment();
         slcDialogFragment.setDialog(builder, fragmentManager);
         slcDialogFragment.setOnDismissListener(onDismissListener);
         slcDialogFragment.setOnCancelListener(onCancelListener);
         slcDialogFragment.setOnClickOfEnsure(onClickListenerSparseArray);
         slcDialogFragment.setCancelable(cancelable);
-        slcDialogFragment.setCompulsoryBottomSheet(compulsoryBottomSheet);
         slcDialogFragment.setKey(key);
         slcDialogFragment.setIsPositiveClickIsAutoDismiss(isPositiveClickIsAutoDismiss);
         return slcDialogFragment;
@@ -134,10 +131,6 @@ public class SlcBottomDialogFragment extends AppCompatDialogFragment implements 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return mBuilder.create();
-    }
-
-    public void setCompulsoryBottomSheet(int compulsoryBottomSheet) {
-        this.compulsoryBottomSheet = compulsoryBottomSheet;
     }
 
     /**
@@ -224,9 +217,8 @@ public class SlcBottomDialogFragment extends AppCompatDialogFragment implements 
     @Override
     public void onStart() {
         super.onStart();
-        if (!isPositiveClickIsAutoDismiss && getDialog() instanceof SlcBottomSheetAlertDialog) {
+        if (!isPositiveClickIsAutoDismiss&&getDialog() instanceof SlcBottomSheetAlertDialog) {
             SlcBottomSheetAlertDialog alertDialog = (SlcBottomSheetAlertDialog) getDialog();
-            alertDialog.setCompulsoryBottomSheet(this.compulsoryBottomSheet);
             Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override

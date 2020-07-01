@@ -717,7 +717,6 @@ public class SlcPopup {
         DialogInterface.OnCancelListener mOnCancelListener;
         DialogInterface.OnShowListener mOnShowListener;
         boolean mIsPositiveClickIsAutoDismiss = true;
-        int compulsoryBottomSheet = BottomSheetBehavior.STATE_DRAGGING;
 
         private static class OnClickListenerDef implements DialogInterface.OnClickListener {
             private WeakReference<SparseArray<DialogInterface.OnClickListener>> clickListenerWeakReference;
@@ -775,7 +774,7 @@ public class SlcPopup {
         }
 
         public T setCompulsoryBottomSheet(int compulsoryBottomSheet) {
-            this.compulsoryBottomSheet = compulsoryBottomSheet;
+            mAlertDialogBuilder.setCompulsoryBottomSheet(compulsoryBottomSheet);
             return (T) this;
         }
 
@@ -1092,7 +1091,7 @@ public class SlcPopup {
         public AlertDialogOperate create() {
             mOnClickListenerDef.setOnClickListener(mDialogOnClickListenerSparseArray);
             AlertDialogOperate alertDialogOperate = SlcBottomDialogFragment.getAlertDialogOperate(mAlertDialogBuilder, mSupportFragmentManagerReference.get(),
-                    this.mOnDismissListener, this.mOnCancelListener, mDialogOnClickListenerSparseArray, this.mCancelable, this.compulsoryBottomSheet, this.mKey, this.mIsPositiveClickIsAutoDismiss);
+                    this.mOnDismissListener, this.mOnCancelListener, mDialogOnClickListenerSparseArray, this.mCancelable, this.mKey, this.mIsPositiveClickIsAutoDismiss);
             mAlertDialogBuilder = null;
             mSupportFragmentManagerReference = null;
             return alertDialogOperate;
