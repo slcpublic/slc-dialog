@@ -47,6 +47,7 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.SlcBottomSheetAlertDialog;
 
 import java.lang.ref.WeakReference;
@@ -716,6 +717,7 @@ public class SlcPopup {
         DialogInterface.OnCancelListener mOnCancelListener;
         DialogInterface.OnShowListener mOnShowListener;
         boolean mIsPositiveClickIsAutoDismiss = true;
+        int compulsoryBottomSheet = BottomSheetBehavior.STATE_DRAGGING;
 
         private static class OnClickListenerDef implements DialogInterface.OnClickListener {
             private WeakReference<SparseArray<DialogInterface.OnClickListener>> clickListenerWeakReference;
@@ -770,6 +772,11 @@ public class SlcPopup {
         @Override
         public Context getContext() {
             return mAlertDialogBuilder.getContext();
+        }
+
+        public T setCompulsoryBottomSheet(int compulsoryBottomSheet) {
+            this.compulsoryBottomSheet = compulsoryBottomSheet;
+            return (T) this;
         }
 
         public T setHideable(boolean hideable) {
@@ -1085,7 +1092,7 @@ public class SlcPopup {
         public AlertDialogOperate create() {
             mOnClickListenerDef.setOnClickListener(mDialogOnClickListenerSparseArray);
             AlertDialogOperate alertDialogOperate = SlcBottomDialogFragment.getAlertDialogOperate(mAlertDialogBuilder, mSupportFragmentManagerReference.get(),
-                    this.mOnDismissListener, this.mOnCancelListener, mDialogOnClickListenerSparseArray, this.mCancelable, this.mKey, this.mIsPositiveClickIsAutoDismiss);
+                    this.mOnDismissListener, this.mOnCancelListener, mDialogOnClickListenerSparseArray, this.mCancelable, this.compulsoryBottomSheet, this.mKey, this.mIsPositiveClickIsAutoDismiss);
             mAlertDialogBuilder = null;
             mSupportFragmentManagerReference = null;
             return alertDialogOperate;

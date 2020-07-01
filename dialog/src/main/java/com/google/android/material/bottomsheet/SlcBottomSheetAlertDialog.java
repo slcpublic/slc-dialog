@@ -58,6 +58,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
     private BottomSheetBehavior<FrameLayout> behavior;
     boolean cancelable;
     boolean isHideable;
+    int compulsoryBottomSheet = BottomSheetBehavior.STATE_DRAGGING;
     private boolean canceledOnTouchOutside;
     private boolean canceledOnTouchOutsideSet;
     private int animRes;
@@ -127,6 +128,11 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         this.mAlert.installContent();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        behavior.setState(this.compulsoryBottomSheet);
+    }
 
     public Button getButton(int whichButton) {
         return this.mAlert.getButton(whichButton);
@@ -140,6 +146,10 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
     public void setCancelable(boolean cancelable) {
         super.setCancelable(cancelable);
         this.cancelable = cancelable;
+    }
+
+    public void setCompulsoryBottomSheet(int compulsoryBottomSheet) {
+        this.compulsoryBottomSheet = compulsoryBottomSheet;
     }
 
     public void setHideable(boolean hideable) {
@@ -321,6 +331,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         private final int mTheme;
         private int mAnimRes;
         private boolean mHideable = true;
+        private int compulsoryBottomSheet = BottomSheetBehavior.STATE_DRAGGING;
 
         public Builder(@NonNull Context context) {
             this(context, SlcBottomSheetAlertDialog.resolveDialogTheme(context, 0));
@@ -334,6 +345,11 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         @NonNull
         public Context getContext() {
             return this.P.mContext;
+        }
+
+        public Builder setCompulsoryBottomSheet(int compulsoryBottomSheet) {
+            this.compulsoryBottomSheet = compulsoryBottomSheet;
+            return this;
         }
 
         public Builder setHideable(boolean hideable) {
