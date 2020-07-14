@@ -95,12 +95,11 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         }
 
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            if (newState == 5 && SlcBottomSheetAlertDialog.this.isHideable) {
+            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 SlcBottomSheetAlertDialog.this.cancel();
-            } else {
-
+            } else if (newState == BottomSheetBehavior.STATE_DRAGGING && !SlcBottomSheetAlertDialog.this.isHideable) {
+                SlcBottomSheetAlertDialog.this.behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
-
         }
 
         public void onSlide(@NonNull View bottomSheet, float slideOffset) {
