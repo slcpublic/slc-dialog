@@ -95,8 +95,10 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         }
 
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            if (newState == 5) {
+            if (newState == 5 && SlcBottomSheetAlertDialog.this.isHideable) {
                 SlcBottomSheetAlertDialog.this.cancel();
+            } else {
+
             }
 
         }
@@ -333,6 +335,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         private boolean mHideable = true;
 
         private int mCompulsoryBottomSheet = BottomSheetBehavior.STATE_DRAGGING;
+
         public Builder(@NonNull Context context) {
             this(context, SlcBottomSheetAlertDialog.resolveDialogTheme(context, 0));
         }
