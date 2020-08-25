@@ -772,11 +772,6 @@ public class SlcPopup {
             return mAlertDialogBuilder.getContext();
         }
 
-        public T setCompulsoryBottomSheet(int compulsoryBottomSheet) {
-            mAlertDialogBuilder.setCompulsoryBottomSheet(compulsoryBottomSheet);
-            return (T) this;
-        }
-
         public T setHideable(boolean hideable) {
             mAlertDialogBuilder.setHideable(hideable);
             return (T) this;
