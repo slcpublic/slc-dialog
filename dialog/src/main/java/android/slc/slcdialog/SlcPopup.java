@@ -778,7 +778,7 @@ public class SlcPopup {
             return (T) this;
         }
 
-        public T setBottomSheetCallback(BottomSheetBehavior.BottomSheetCallback bottomSheetCallback) {
+        public T setBottomSheetCallback(SlcBottomSheetAlertDialog.SlcBottomSheetAlertDialogCallback bottomSheetCallback) {
             mAlertDialogBuilder.setBottomSheetCallback(bottomSheetCallback);
             return (T) this;
         }
