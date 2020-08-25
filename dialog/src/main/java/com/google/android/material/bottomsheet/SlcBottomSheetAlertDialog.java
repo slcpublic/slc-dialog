@@ -337,7 +337,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         private final int mTheme;
         private int mAnimRes;
         private boolean mHideable = true;
-        private SlcBottomSheetAlertDialogCallback mBottomSheetCallback;
+        private SlcBottomSheetAlertDialogCallback mBottomSheetCallback=new SlcBottomSheetAlertDialogCallback();
 
 
         public Builder(@NonNull Context context) {
