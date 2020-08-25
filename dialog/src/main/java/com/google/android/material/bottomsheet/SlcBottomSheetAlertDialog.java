@@ -72,7 +72,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         this.cancelable = true;
         this.isHideable = true;
         this.canceledOnTouchOutside = true;
-        this.bottomSheetCallback = new NamelessClass_1();
+        this.bottomSheetCallback = new MyBottomSheetCallback();
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         this.animRes = R.style.SlcBottomSheetAnimDef;
         this.mAlert = new SlcAlertController(this.getContext(), this, this.getWindow());
@@ -83,18 +83,18 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         this.setCancelable(cancelable);
         this.setOnCancelListener(cancelListener);
         this.canceledOnTouchOutside = true;
-        this.bottomSheetCallback = new NamelessClass_1();
+        this.bottomSheetCallback = new MyBottomSheetCallback();
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         this.cancelable = cancelable;
         this.isHideable = true;
     }
 
-    class NamelessClass_1 extends BottomSheetBehavior.BottomSheetCallback {
-        NamelessClass_1() {
+    class MyBottomSheetCallback extends BottomSheetBehavior.BottomSheetCallback {
+        MyBottomSheetCallback() {
         }
 
-        public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            if (newState == 5) {
+        public void onStateChanged(@NonNull View bottomSheet, @BottomSheetBehavior.State int newState) {
+            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 SlcBottomSheetAlertDialog.this.cancel();
             }
 
@@ -201,6 +201,10 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         if (animRes != 0) {
             this.animRes = animRes;
         }
+    }
+
+    public void setBottomSheetCallback(BottomSheetBehavior.BottomSheetCallback bottomSheetCallback) {
+        this.bottomSheetCallback = bottomSheetCallback;
     }
 
     @Override
@@ -320,6 +324,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         private final int mTheme;
         private int mAnimRes;
         private boolean mHideable = true;
+        private BottomSheetBehavior.BottomSheetCallback mBottomSheetCallback;
 
 
         public Builder(@NonNull Context context) {
@@ -385,6 +390,11 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
 
         public Builder setAnimRes(@AnimRes int animRes) {
             this.mAnimRes = animRes;
+            return this;
+        }
+
+        public Builder setBottomSheetCallback(BottomSheetBehavior.BottomSheetCallback bottomSheetCallback) {
+            this.mBottomSheetCallback = bottomSheetCallback;
             return this;
         }
 
@@ -601,6 +611,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
             if (this.P.mCancelable) {
                 dialog.setCanceledOnTouchOutside(true);
             }
+            dialog.setBottomSheetCallback(mBottomSheetCallback);
             dialog.setOnCancelListener(this.P.mOnCancelListener);
             dialog.setOnDismissListener(this.P.mOnDismissListener);
             if (this.P.mOnKeyListener != null) {

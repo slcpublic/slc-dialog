@@ -47,6 +47,7 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.SlcBottomSheetAlertDialog;
 
 import java.lang.ref.WeakReference;
@@ -774,6 +775,11 @@ public class SlcPopup {
 
         public T setHideable(boolean hideable) {
             mAlertDialogBuilder.setHideable(hideable);
+            return (T) this;
+        }
+
+        public T setBottomSheetCallback(BottomSheetBehavior.BottomSheetCallback bottomSheetCallback) {
+            mAlertDialogBuilder.setBottomSheetCallback(bottomSheetCallback);
             return (T) this;
         }
 
