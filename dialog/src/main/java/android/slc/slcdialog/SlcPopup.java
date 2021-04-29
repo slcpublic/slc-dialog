@@ -60,7 +60,7 @@ import java.util.Map;
  */
 
 public class SlcPopup {
-    private static Map<String, BaseOperate> operateMap = new LinkedHashMap<>();
+    private static final Map<String, BaseOperate> operateMap = new LinkedHashMap<>();
 
     public static void addOperate(String key, BaseOperate baseOperate) {
         if (!TextUtils.isEmpty(key) && baseOperate != null) {
@@ -193,7 +193,7 @@ public class SlcPopup {
      * 加载对话框
      */
     public static class LoadingBuilder extends BaseBuilder<LoadingBuilder, DialogOperate> {
-        private Dialog mLoadingDialog;
+        private final Dialog mLoadingDialog;
         private View mLoadingView;
         private CharSequence mMessage;
         private DialogInterface.OnDismissListener mOnDismissListener;
@@ -288,39 +288,7 @@ public class SlcPopup {
             mLoadingDialog.setOnCancelListener(new WeakReference<>(this.mOnCancelListener).get());
             mLoadingDialog.setOnShowListener(new WeakReference<>(this.mOnShowListener).get());
             mLoadingDialog.setCancelable(mCancelable);
-            return new DialogOperate() {
-                private LoadingBuilder loadingBuilder = LoadingBuilder.this;
-
-                @Override
-                public Dialog getDialog() {
-                    return mLoadingDialog;
-                }
-
-                @Override
-                public void dismiss() {
-                    mLoadingDialog.dismiss();
-                    loadingBuilder = null;
-                    /*LoadingBuilder.this.mOnCancelListener=null;
-                    LoadingBuilder.this.mOnDismissListener=null;
-                    LoadingBuilder.this.mOnShowListener=null;*/
-                }
-
-                @Override
-                public void show() {
-                    mLoadingDialog.show();
-                    SlcPopup.addOperate(getKey(), this);
-                }
-
-                @Override
-                public boolean isCancelable() {
-                    return mCancelable;
-                }
-
-                @Override
-                public String getKey() {
-                    return mKey;
-                }
-            };
+            return new LoadingDialogOperateImpl(mLoadingDialog,mCancelable,mKey);
         }
     }
 
@@ -1520,6 +1488,10 @@ public class SlcPopup {
 
     public interface DialogOperate extends BaseOperate {
         Dialog getDialog();
+    }
+
+    public interface LoadingDialogOperate extends DialogOperate {
+        void updateMessage(String message);
     }
 
     public interface AlertDialogOperate extends DialogOperate {
