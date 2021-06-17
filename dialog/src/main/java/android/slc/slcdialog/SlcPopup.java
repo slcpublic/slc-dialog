@@ -14,6 +14,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.slc.slcdialog.fragment.SlcBaseDialogFragment;
 import android.slc.slcdialog.fragment.SlcBottomDialogFragment;
 import android.slc.slcdialog.fragment.SlcDialogFragment;
 import android.text.TextUtils;
@@ -132,6 +133,22 @@ public class SlcPopup {
         }
 
         public abstract Context getContext();
+
+        protected boolean isCancelable() {
+            return mCancelable;
+        }
+
+        protected String getKey() {
+            return mKey;
+        }
+
+        protected int getMaxWidth() {
+            return mMaxWidth;
+        }
+
+        protected int getMaxHeight() {
+            return mMaxHeight;
+        }
 
         int dip2px(float dipValue) {
             final float scale = getContext().getResources().getDisplayMetrics().density;
@@ -697,13 +714,17 @@ public class SlcPopup {
 
         public AlertDialogOperate create() {
             mOnClickListenerDef.setOnClickListener(mDialogOnClickListenerSparseArray);
-            AlertDialogOperate alertDialogOperate = SlcDialogFragment.getAlertDialogOperate(mAlertDialogBuilder, mSupportFragmentManagerReference.get(),
+            SlcBaseDialogFragment<AlertDialog.Builder> slcDialogFragment = createDialogFragment();
+            SlcBaseDialogFragment.fillAlertDialogOperate(slcDialogFragment, mAlertDialogBuilder, mSupportFragmentManagerReference.get(),
                     this.mOnDismissListener, this.mOnCancelListener, mDialogOnClickListenerSparseArray, this.mCancelable, this.mKey, this.mIsPositiveClickIsAutoDismiss);
             mAlertDialogBuilder = null;
             mSupportFragmentManagerReference = null;
-            return alertDialogOperate;
+            return slcDialogFragment;
         }
 
+        protected SlcBaseDialogFragment<AlertDialog.Builder> createDialogFragment() {
+            return new SlcDialogFragment();
+        }
     }
 
     public static abstract class BottomAlertDialogBuilder<T extends BottomAlertDialogBuilder, O extends DialogOperate> extends BaseBuilder<T, O> {
@@ -1121,13 +1142,17 @@ public class SlcPopup {
 
         public AlertDialogOperate create() {
             mOnClickListenerDef.setOnClickListener(mDialogOnClickListenerSparseArray);
-            AlertDialogOperate alertDialogOperate = SlcBottomDialogFragment.getAlertDialogOperate(mAlertDialogBuilder, mSupportFragmentManagerReference.get(),
+            SlcBaseDialogFragment<SlcBottomSheetAlertDialog.Builder> slcDialogFragment = createSlcDialogFragment();
+            SlcBaseDialogFragment.fillAlertDialogOperate(slcDialogFragment, mAlertDialogBuilder, mSupportFragmentManagerReference.get(),
                     this.mOnDismissListener, this.mOnCancelListener, mDialogOnClickListenerSparseArray, this.mCancelable, this.mKey, this.mIsPositiveClickIsAutoDismiss);
             mAlertDialogBuilder = null;
             mSupportFragmentManagerReference = null;
-            return alertDialogOperate;
+            return slcDialogFragment;
         }
 
+        public SlcBaseDialogFragment<SlcBottomSheetAlertDialog.Builder> createSlcDialogFragment() {
+            return new SlcBottomDialogFragment();
+        }
     }
 
     public static class PopupWindowBuilder extends BaseBuilder<PopupWindowBuilder, PopupOperate> {
