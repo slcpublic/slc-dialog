@@ -288,14 +288,14 @@ public class SlcPopup {
             mLoadingDialog.setOnCancelListener(new WeakReference<>(this.mOnCancelListener).get());
             mLoadingDialog.setOnShowListener(new WeakReference<>(this.mOnShowListener).get());
             mLoadingDialog.setCancelable(mCancelable);
-            return new LoadingDialogOperateImpl(mLoadingDialog,mCancelable,mKey);
+            return new LoadingDialogOperateImpl(mLoadingDialog, mCancelable, mKey);
         }
     }
 
     public static abstract class AlertDialogBuilder<T extends AlertDialogBuilder, O extends DialogOperate> extends BaseBuilder<T, O> {
+        public static final int ALL_CLICK_LISTENER = -100, ITEM_CLICK_LISTENER = -101;
         AlertDialog.Builder mAlertDialogBuilder;
         WeakReference<FragmentManager> mSupportFragmentManagerReference;
-        public static final int ALL_CLICK_LISTENER = -100, ITEM_CLICK_LISTENER = -101;
         SparseArray<DialogInterface.OnClickListener> mDialogOnClickListenerSparseArray = new SparseArray<>();
         OnClickListenerDef mOnClickListenerDef = new OnClickListenerDef();
         DialogInterface.OnDismissListener mOnDismissListener;
@@ -358,6 +358,37 @@ public class SlcPopup {
             return mAlertDialogBuilder.getContext();
         }
 
+        protected AlertDialog.Builder getAlertDialogBuilder() {
+            return mAlertDialogBuilder;
+        }
+
+        protected WeakReference<FragmentManager> getSupportFragmentManagerReference() {
+            return mSupportFragmentManagerReference;
+        }
+
+        protected SparseArray<DialogInterface.OnClickListener> getDialogOnClickListenerSparseArray() {
+            return mDialogOnClickListenerSparseArray;
+        }
+
+        protected OnClickListenerDef getOnClickListenerDef() {
+            return mOnClickListenerDef;
+        }
+
+        protected DialogInterface.OnDismissListener getOnDismissListener() {
+            return mOnDismissListener;
+        }
+
+        protected DialogInterface.OnCancelListener getOnCancelListener() {
+            return mOnCancelListener;
+        }
+
+        protected DialogInterface.OnShowListener getOnShowListener() {
+            return mOnShowListener;
+        }
+
+        protected boolean isIsPositiveClickIsAutoDismiss() {
+            return mIsPositiveClickIsAutoDismiss;
+        }
 
         public T setCustomTitle(@Nullable View customTitleView) {
             mAlertDialogBuilder.setCustomTitle(customTitleView);
@@ -676,9 +707,9 @@ public class SlcPopup {
     }
 
     public static abstract class BottomAlertDialogBuilder<T extends BottomAlertDialogBuilder, O extends DialogOperate> extends BaseBuilder<T, O> {
+        public static final int ALL_CLICK_LISTENER = -100, ITEM_CLICK_LISTENER = -101;
         SlcBottomSheetAlertDialog.Builder mAlertDialogBuilder;
         WeakReference<FragmentManager> mSupportFragmentManagerReference;
-        public static final int ALL_CLICK_LISTENER = -100, ITEM_CLICK_LISTENER = -101;
         SparseArray<DialogInterface.OnClickListener> mDialogOnClickListenerSparseArray = new SparseArray<>();
         OnClickListenerDef mOnClickListenerDef = new OnClickListenerDef();
         DialogInterface.OnDismissListener mOnDismissListener;
@@ -739,6 +770,38 @@ public class SlcPopup {
         @Override
         public Context getContext() {
             return mAlertDialogBuilder.getContext();
+        }
+
+        public SlcBottomSheetAlertDialog.Builder getAlertDialogBuilder() {
+            return mAlertDialogBuilder;
+        }
+
+        public WeakReference<FragmentManager> getSupportFragmentManagerReference() {
+            return mSupportFragmentManagerReference;
+        }
+
+        public SparseArray<DialogInterface.OnClickListener> getDialogOnClickListenerSparseArray() {
+            return mDialogOnClickListenerSparseArray;
+        }
+
+        public OnClickListenerDef getOnClickListenerDef() {
+            return mOnClickListenerDef;
+        }
+
+        public DialogInterface.OnDismissListener getOnDismissListener() {
+            return mOnDismissListener;
+        }
+
+        public DialogInterface.OnCancelListener getOnCancelListener() {
+            return mOnCancelListener;
+        }
+
+        public DialogInterface.OnShowListener getOnShowListener() {
+            return mOnShowListener;
+        }
+
+        public boolean isIsPositiveClickIsAutoDismiss() {
+            return mIsPositiveClickIsAutoDismiss;
         }
 
         public T setHideable(boolean hideable) {
