@@ -48,7 +48,6 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.SlcBottomSheetAlertDialog;
 
 import java.lang.ref.WeakReference;
@@ -270,7 +269,7 @@ public class SlcPopup {
         @Override
         public DialogOperate create() {
             if (mLoadingView == null) {
-                mLoadingView = LayoutInflater.from(getContext()).inflate(R.layout.slc_def_loading, null);
+                mLoadingView = LayoutInflater.from(getContext()).inflate(R.layout.slc_popup_def_loading, null);
             }
             TextView messageTextView = mLoadingView.findViewById(android.R.id.message);
             if (messageTextView != null) {
@@ -309,6 +308,13 @@ public class SlcPopup {
         }
     }
 
+    /**
+     * 过度封装，建议直接用原生的对话框
+     *
+     * @param <T>
+     * @param <O>
+     */
+    @Deprecated
     public static abstract class AlertDialogBuilder<T extends AlertDialogBuilder, O extends DialogOperate> extends BaseBuilder<T, O> {
         public static final int ALL_CLICK_LISTENER = -100, ITEM_CLICK_LISTENER = -101;
         AlertDialog.Builder mAlertDialogBuilder;
@@ -458,8 +464,8 @@ public class SlcPopup {
         }
 
         public T setDefPositiveAndNegativeButton() {
-            setPositiveButton(R.string.def_positive);
-            setNegativeButton(R.string.def_negative);
+            setPositiveButton(R.string.slc_popup_def_positive);
+            setNegativeButton(R.string.slc_popup_def_negative);
             return (T) this;
         }
 
@@ -586,6 +592,9 @@ public class SlcPopup {
         }
     }
 
+    /**
+     * 过度封装，建议直接用原生的对话框
+     */
     public static class NativeAlertDialogBuilder extends AlertDialogBuilder<NativeAlertDialogBuilder, AlertDialogOperate> {
 
         public NativeAlertDialogBuilder(@NonNull Context context) {
@@ -727,6 +736,12 @@ public class SlcPopup {
         }
     }
 
+    /**
+     * 过度封装，建议直接用原生的对话框
+     *
+     * @param <T>
+     * @param <O>
+     */
     public static abstract class BottomAlertDialogBuilder<T extends BottomAlertDialogBuilder, O extends DialogOperate> extends BaseBuilder<T, O> {
         public static final int ALL_CLICK_LISTENER = -100, ITEM_CLICK_LISTENER = -101;
         SlcBottomSheetAlertDialog.Builder mAlertDialogBuilder;
@@ -886,8 +901,8 @@ public class SlcPopup {
         }
 
         public T setDefPositiveAndNegativeButton() {
-            setPositiveButton(R.string.def_positive);
-            setNegativeButton(R.string.def_negative);
+            setPositiveButton(R.string.slc_popup_def_positive);
+            setNegativeButton(R.string.slc_popup_def_negative);
             return (T) this;
         }
 
@@ -1014,6 +1029,9 @@ public class SlcPopup {
         }
     }
 
+    /**
+     * 过度封装，建议直接用原生的对话框
+     */
     public static class BottomNativeAlertDialogBuilder extends BottomAlertDialogBuilder<BottomNativeAlertDialogBuilder, AlertDialogOperate> {
 
         public BottomNativeAlertDialogBuilder(@NonNull Context context) {
@@ -1313,13 +1331,13 @@ public class SlcPopup {
     }
 
     public static class ShadowPopupWindowBuilder extends BaseBuilder<ShadowPopupWindowBuilder, BaseOperate> {
-        private Context mContext;
+        private final Context mContext;
         private FrameLayout mRootView;
         private FrameLayout mContentParentView;
         private boolean mIsEnsureContentParentGravity;
         private int mDuration = -1;
-        private int mPositiveAnimRes = R.style.SlcShadowAnimDef;
-        private int mNegativeAnimRes = R.style.SlcShadowAnimNegativeDef;
+        private int mPositiveAnimRes = R.style.Animation_AppCompat_Dialog_SlcPopupShadow;
+        private int mNegativeAnimRes = R.style.Animation_AppCompat_Dialog_SlcPopupShadow_Negative;
         protected Drawable mBgDrawable;
         protected int mMaxWidth, mMaxHeight;
         protected int mDirection;
@@ -1454,10 +1472,10 @@ public class SlcPopup {
             int[] attr = new int[]{android.R.attr.windowEnterAnimation, android.R.attr.windowEnterAnimation};
             TypedArray array = mContext.getTheme().obtainStyledAttributes(mDirection == Gravity.BOTTOM ? mNegativeAnimRes :
                     mPositiveAnimRes, attr);
-            int enterAnimId = array.getResourceId(0, mDirection == Gravity.BOTTOM ? R.anim.top_shadow_in_def :
-                    R.anim.bottom_shadow_in_def);
-            int exitAnimId = array.getResourceId(1, mDirection == Gravity.BOTTOM ? R.anim.top_shadow_out_def :
-                    R.anim.bottom_shadow_out_def);
+            int enterAnimId = array.getResourceId(0, mDirection == Gravity.BOTTOM ? R.anim.slc_popup_top_shadow_in_def :
+                    R.anim.slc_popup_bottom_shadow_in_def);
+            int exitAnimId = array.getResourceId(1, mDirection == Gravity.BOTTOM ? R.anim.slc_popup_top_shadow_out_def :
+                    R.anim.slc_popup_bottom_shadow_out_def);
             array.recycle();
             if (mBgDrawable != null) {
                 mContentParentView.getChildAt(0).setBackground(mBgDrawable);

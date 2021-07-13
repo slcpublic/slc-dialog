@@ -1,35 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.AppCompat.Dialog.Alert.BottomSheet" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowAnimationStyle">@style/Animation.Design.BottomSheetDialog</item>
-        <item name="bottomSheetStyle">@style/Widget.Design.BottomSheet.Modal</item>
+    <style name="Animation.SlcPopup" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/slc_popup_popup_enter_def</item>
+        <item name="android:windowExitAnimation">@anim/slc_popup_popup_exit_def</item>
     </style>
 
-    <style name="Theme.AppCompat.Light.Dialog.Alert.BottomSheet" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowAnimationStyle">@style/Animation.Design.BottomSheetDialog</item>
-        <item name="bottomSheetStyle">@style/Widget.Design.BottomSheet.Modal</item>
+    <style name="Animation.MaterialComponents.BottomSheetDialog.SlcPopup">
+        <item name="android:windowEnterAnimation">@anim/slc_popup_bottom_sheet_slide_in_def</item>
+        <item name="android:windowExitAnimation">@anim/slc_popup_bottom_sheet_slide_out_def</item>
     </style>
 
-    <style name="SlcPopupAnimDef" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/popup_enter_def</item>
-        <item name="android:windowExitAnimation">@anim/popup_exit_def</item>
+    <style name="Animation.AppCompat.Dialog.SlcPopupShadow" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/slc_popup_bottom_shadow_in_def</item>
+        <item name="android:windowExitAnimation">@anim/slc_popup_bottom_shadow_out_def</item>
     </style>
 
-    <style name="SlcBottomSheetAnimDef" parent="Animation.AppCompat.Dialog">
-        <item name="android:windowEnterAnimation">@anim/bottom_sheet_slide_in_def</item>
-        <item name="android:windowExitAnimation">@anim/bottom_sheet_slide_out_def</item>
-    </style>
-
-    <style name="SlcShadowAnimDef" parent="Animation.AppCompat.Dialog">
-        <item name="android:windowEnterAnimation">@anim/bottom_shadow_in_def</item>
-        <item name="android:windowExitAnimation">@anim/bottom_shadow_out_def</item>
-    </style>
-
-    <style name="SlcShadowAnimNegativeDef" parent="Animation.AppCompat.Dialog">
-        <item name="android:windowEnterAnimation">@anim/top_shadow_in_def</item>
-        <item name="android:windowExitAnimation">@anim/top_shadow_out_def</item>
+    <style name="Animation.AppCompat.Dialog.SlcPopupShadow.Negative">
+        <item name="android:windowEnterAnimation">@anim/slc_popup_top_shadow_in_def</item>
+        <item name="android:windowExitAnimation">@anim/slc_popup_top_shadow_out_def</item>
     </style>
 </resources>

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="config_popup_short_dur">160</integer>
+    <integer name="slc_popup_config_short_dur">160</integer>
 </resources>

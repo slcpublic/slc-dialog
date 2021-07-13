@@ -15,12 +15,12 @@
   ~ limitations under the License.
 -->
 <set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="@integer/config_popup_short_dur"
-    android:interpolator="@android:interpolator/fast_out_slow_in">
+    android:duration="@integer/slc_popup_config_short_dur"
+    android:interpolator="@android:anim/accelerate_interpolator">
 
     <translate
         android:fromYDelta="0"
-        android:toYDelta="20%p"/>
+        android:toYDelta="-20%p"/>
 
     <alpha
         android:fromAlpha="1.0"

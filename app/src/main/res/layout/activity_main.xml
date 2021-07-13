@@ -13,18 +13,26 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/mb_show_dialog_test"
+            android:id="@+id/mb_show_dialog_bottom_old"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="测试"
+            android:text="底部Alert old"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mb_show_dialog_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="底部Alert"
+            app:layout_constraintTop_toBottomOf="@+id/mb_show_dialog_bottom_old"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/mb_show_dialog_test2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="测试"
-            app:layout_constraintTop_toBottomOf="@+id/mb_show_dialog_test"
+            android:text="常规Alert"
+            app:layout_constraintTop_toBottomOf="@+id/mb_show_dialog_bottom"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

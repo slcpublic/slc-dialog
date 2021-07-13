@@ -51,7 +51,7 @@ import android.slc.slcdialog.R;
 
 import java.lang.ref.WeakReference;
 
-
+@Deprecated
 public class SlcBottomSheetAlertDialog extends AppCompatDialog implements DialogInterface {
     static final int LAYOUT_HINT_NONE = 0;
     static final int LAYOUT_HINT_SIDE = 1;
@@ -76,7 +76,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         this.canceledOnTouchOutside = true;
         setBottomSheetCallback(new SlcBottomSheetAlertDialogCallback());
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.animRes = R.style.SlcBottomSheetAnimDef;
+        this.animRes = R.style.Animation_MaterialComponents_BottomSheetDialog_SlcPopup;
         this.mAlert = new SlcAlertController(this.getContext(), this, this.getWindow());
     }
 
@@ -246,7 +246,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
     }
 
     private View wrapInBottomSheet(int layoutResId, View view, ViewGroup.LayoutParams params) {
-        FrameLayout container = (FrameLayout) View.inflate(this.getContext(), R.layout.slc_design_bottom_sheet_dialog, (ViewGroup) null);
+        FrameLayout container = (FrameLayout) View.inflate(this.getContext(), R.layout.slc_popup_design_bottom_sheet_dialog, (ViewGroup) null);
         CoordinatorLayout coordinator = container.findViewById(R.id.coordinator);
         if (layoutResId != 0 && view == null) {
             view = this.getLayoutInflater().inflate(layoutResId, coordinator, false);
@@ -337,7 +337,7 @@ public class SlcBottomSheetAlertDialog extends AppCompatDialog implements Dialog
         private final int mTheme;
         private int mAnimRes;
         private boolean mHideable = true;
-        private SlcBottomSheetAlertDialogCallback mBottomSheetCallback=new SlcBottomSheetAlertDialogCallback();
+        private SlcBottomSheetAlertDialogCallback mBottomSheetCallback = new SlcBottomSheetAlertDialogCallback();
 
 
         public Builder(@NonNull Context context) {
