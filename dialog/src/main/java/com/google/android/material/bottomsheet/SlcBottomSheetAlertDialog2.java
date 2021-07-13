@@ -215,14 +215,14 @@ public class SlcBottomSheetAlertDialog2 extends BottomSheetDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window = this.getWindow();
+        /*Window window = this.getWindow();
         if (window != null) {
-            /*window.setWindowAnimations(animRes);
-            mWindowBackground = window.getDecorView().getBackground();
-            if (mWindowBackground instanceof InsetDrawable) {
-                InsetDrawable insetWindowBackground = (InsetDrawable) mWindowBackground;
-                mWindowBackground = insetWindowBackground.getDrawable();
-            }*/
+            //window.setWindowAnimations(animRes);
+            //mWindowBackground = window.getDecorView().getBackground();
+            //if (mWindowBackground instanceof InsetDrawable) {
+            //    InsetDrawable insetWindowBackground = (InsetDrawable) mWindowBackground;
+            //    mWindowBackground = insetWindowBackground.getDrawable();
+            //}
             window.getDecorView().setBackground(new ColorDrawable(Color.TRANSPARENT));
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             window.getDecorView().setPadding(0, 0, 0, 0);
@@ -231,7 +231,7 @@ public class SlcBottomSheetAlertDialog2 extends BottomSheetDialog {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             }
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        }
+        }*/
         mAlert.installContent();
     }
 
@@ -251,16 +251,18 @@ public class SlcBottomSheetAlertDialog2 extends BottomSheetDialog {
         return super.onKeyUp(keyCode, event);
     }
 
-    static int resolveDialogTheme(@NonNull Context context, @StyleRes int resid) {
-        // Check to see if this resourceId has a valid package ID.
-        if (((resid >>> 24) & 0x000000ff) >= 0x00000001) {   // start of real resource IDs.
-            return resid;
-        } else {
+    static int resolveDialogTheme(@NonNull Context context, @StyleRes int themeId) {
+        if (themeId == 0) {
+            // If the provided theme is 0, then retrieve the dialogTheme from our theme
             TypedValue outValue = new TypedValue();
-            context.getTheme().resolveAttribute(R.attr.bottomSheetDialogTheme, outValue, true);
-            return outValue.resourceId;
-            //return R.style.Theme_AppCompat_Light_Dialog_Alert_BottomSheet;
+            if (context.getTheme().resolveAttribute(R.attr.bottomSheetDialogTheme, outValue, true)) {
+                themeId = outValue.resourceId;
+            } else {
+                // bottomSheetDialogTheme is not provided; we default to our light theme
+                themeId = R.style.ThemeOverlay_MaterialComponents_BottomSheetDialog;
+            }
         }
+        return themeId;
     }
 
     public static class Builder {

@@ -20,4 +20,10 @@
         <item name="android:windowEnterAnimation">@anim/slc_popup_top_shadow_in_def</item>
         <item name="android:windowExitAnimation">@anim/slc_popup_top_shadow_out_def</item>
     </style>
+
+    <style name="ThemeOverlay.MaterialComponents.BottomSheetDialog.SlcPopup">
+        <item name="android:windowAnimationStyle">
+            @style/Animation.MaterialComponents.BottomSheetDialog.SlcPopup
+        </item>
+    </style>
 </resources>
